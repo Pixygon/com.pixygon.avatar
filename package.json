@@ -1,0 +1,26 @@
+{
+  "name": "com.pixygon.avatar",
+  "version": "0.1.0",
+  "displayName": "Pixygon - Avatar",
+  "description": "The humanoid body for an Actor — a Mii-like, ID-based, customizable avatar. Engine-portable core (AvatarSlot + AvatarSpec) + a Unity adapter (AvatarPart catalog, AvatarBuilder, renderer seam, race body-modes). Reads the shared AvatarData from com.pixygon.saving; implements IBody from com.pixygon.actors.",
+  "unity": "2023.2",
+  "unityRelease": "14f1",
+  "documentationUrl": "https://www.pixygon.io/dev",
+  "dependencies": {
+    "com.pixygon.idsystem": "0.5.0",
+    "com.pixygon.saving": "0.5.0",
+    "com.pixygon.actors": "0.1.0"
+  },
+  "hideInEditor": false,
+  "keywords": [
+    "Pixygon",
+    "Avatar",
+    "Character",
+    "Customization"
+  ],
+  "author": {
+    "name": "Pixygon",
+    "email": "pixygon@pixygon.io",
+    "url": "https://www.pixygon.io"
+  }
+}

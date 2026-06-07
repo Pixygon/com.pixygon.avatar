@@ -1,0 +1,14 @@
+{
+    "name": "Pixygon.Avatar.Core",
+    "rootNamespace": "Pixygon.Avatar",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": true
+}
