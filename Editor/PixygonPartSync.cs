@@ -37,6 +37,11 @@ namespace Pixygon.Avatar.Editor {
                 if (obj is AvatarPart part) Sync(part);
         }
 
+        /// <summary>Sync one part immediately (the Workbench's Save &amp; Sync button).</summary>
+        public static void SyncNow(AvatarPart part) {
+            if (part != null) Sync(part);
+        }
+
         private static void OnPostprocessAllAssets(string[] imported, string[] deleted, string[] moved, string[] movedFrom) {
             if (!EditorPrefs.GetBool(PrefAuto, false)) return;
             foreach (var path in imported) {
