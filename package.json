@@ -1,6 +1,6 @@
 {
   "name": "com.pixygon.avatar",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "displayName": "Pixygon - Avatar",
   "description": "The humanoid body for an Actor \u2014 a Mii-like, ID-based, customizable avatar. Engine-portable core (AvatarSlot + AvatarSpec) + a Unity adapter (AvatarPart catalog, AvatarBuilder, renderer seam, race body-modes). Reads the shared AvatarData from com.pixygon.saving; implements IBody from com.pixygon.actors.",
   "unity": "2023.2",

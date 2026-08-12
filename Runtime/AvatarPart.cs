@@ -24,7 +24,13 @@ namespace Pixygon.Avatar {
         public Sprite _sprite2D;
         public int _sortingOrder;
 
-        [Header("Unlock")]
+        [Header("Fix (load-time correction — mirrors the server AvatarAsset.fix; tune with the " +
+             "Workbench gizmos, never by re-exporting)")]
+    public Vector3 _fixPosition = Vector3.zero;
+    public Vector3 _fixEuler = Vector3.zero;
+    public float _fixScale = 1f;
+
+    [Header("Unlock")]
         [Tooltip("If false, the part must be unlocked (SkinCard / NFT / account). Hook attaches here later.")]
         public bool _ownedByDefault = true;
 
