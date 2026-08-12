@@ -87,3 +87,6 @@ for the reference implementation.
 **Garments = clothing with consequence:** `GarmentPart : AvatarPart` adds stat
 modifiers (applied to the wearer's `StatBlock`, keyed per slot), weight, lore
 and the GLB source. Armor is not a separate system.
+
+**Web-side handoff:** the full convention + adherence checklist for the web
+Avatar Studio lives in `pixygon-packages/@pixygon/avatar/CONVENTION.md`.
