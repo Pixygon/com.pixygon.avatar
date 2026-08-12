@@ -77,23 +77,43 @@ namespace Pixygon.Avatar.Editor {
                 return;
             }
 
+            await Upload(string.IsNullOrEmpty(part._displayName) ? part.name : part._displayName,
+                glbPath, part._slot.ToString().ToLowerInvariant(),
+                garment != null ? "clothing" : "other", "skinned", part.GetFullID);
+        }
+
+        /// <summary>
+        /// Upload any GLB into the avatar asset library (/v1/avatar/assets) — the shared surface
+        /// for parts, garments AND BODIES. Game repos call this from their own exporters
+        /// (e.g. Veilwalkers' character-body sync); partId is the stable IdObject id (0 = none).
+        /// </summary>
+        public static async System.Threading.Tasks.Task<bool> Upload(
+            string displayName, string glbPath, string slot, string category, string attachType, int partId) {
+            var key = ApiKey();
+            if (string.IsNullOrEmpty(key)) {
+                Debug.LogWarning("[AvatarSync] No API key — upload skipped.");
+                return false;
+            }
             try {
                 using var http = new HttpClient();
                 http.DefaultRequestHeaders.Add("x-api-key", key);
                 using var form = new MultipartFormDataContent();
-                form.Add(new StringContent(string.IsNullOrEmpty(part._displayName) ? part.name : part._displayName), "name");
+                form.Add(new StringContent(displayName), "name");
                 form.Add(new StringContent("mesh"), "type");
-                form.Add(new StringContent(garment != null ? "clothing" : "other"), "category");
-                form.Add(new StringContent(part._slot.ToString().ToLowerInvariant()), "slot");
-                form.Add(new StringContent("skinned"), "attachType");
+                form.Add(new StringContent(category), "category");
+                form.Add(new StringContent(slot), "slot");
+                form.Add(new StringContent(attachType), "attachType");
+                if (partId != 0) form.Add(new StringContent(partId.ToString()), "partId");
                 var file = new ByteArrayContent(File.ReadAllBytes(glbPath));
                 file.Headers.Add("Content-Type", "model/gltf-binary");
-                form.Add(file, "file", part.name + ".glb");
+                form.Add(file, "file", displayName + ".glb");
                 var url = EditorPrefs.GetString(PrefUrl, DefaultUrl);
                 var res = await http.PostAsync(url, form);
-                Debug.Log($"[AvatarSync] {part.name} → {url}: {(int)res.StatusCode} {res.ReasonPhrase}");
+                Debug.Log($"[AvatarSync] {displayName} → {url}: {(int)res.StatusCode} {res.ReasonPhrase}");
+                return res.IsSuccessStatusCode;
             } catch (Exception e) {
-                Debug.LogWarning($"[AvatarSync] {part.name}: upload failed — {e.Message}");
+                Debug.LogWarning($"[AvatarSync] {displayName}: upload failed — {e.Message}");
+                return false;
             }
         }
 
