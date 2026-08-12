@@ -63,3 +63,27 @@ rig-assembler: snap bones, material swaps, body-height) + `Avatar2DRenderer` (sp
 stack for micro); the **AvatarCustomizer** UI; `SkinCard`/NFT unlock wiring; biology
 fields on `AvatarData` (or a side-car) so race morphs persist. `.meta` files generate
 on first Unity import.
+
+## The portable item convention (GLB + baked manifest) — 0.2.0
+
+Weapons, garments, armor and pickups are **one file that is the whole item**:
+a **GLB** whose `asset.extras.pixygonItem` carries the `ItemManifest` JSON —
+stats, lore, Codex slug, worn placement, casting data. Unity, a browser
+`<model-viewer>`, and the future Pixygon Engine all read the SAME file and get
+the SAME item: identical materials, identical meaning.
+
+**GLB rules (non-negotiable, so every consumer agrees):**
+- Units: **meters**. Axes: **Y-up, +Z forward** (glTF standard).
+- Origin: the **grip** for held items; the **worn anchor** for garments.
+- Materials: **PBR metallic-roughness**, textures **embedded** (no sidecar files).
+- Manifest: `asset.extras.pixygonItem` (schema 1, append-only). A `.json`
+  sidecar with identical content is the fallback for pipelines that strip extras.
+
+**In code:** `ItemManifest` (Core, engine-free) writes the JSON;
+`GarmentPart.ToManifest()` builds it from the authored asset. Game repos carry
+the exporter (Editor menu) — see Veilwalkers `Assets/Editor/PixygonItemExport.cs`
+for the reference implementation.
+
+**Garments = clothing with consequence:** `GarmentPart : AvatarPart` adds stat
+modifiers (applied to the wearer's `StatBlock`, keyed per slot), weight, lore
+and the GLB source. Armor is not a separate system.

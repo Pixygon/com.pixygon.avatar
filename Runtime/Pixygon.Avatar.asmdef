@@ -6,7 +6,9 @@
         "Pixygon.ID",
         "Pixygon.Saving",
         "Pixygon.Actors",
-        "Pixygon.Actors.Core"
+        "Pixygon.Actors.Core",
+        "Pixygon.Stats.Core",
+        "Pixygon.Stats"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
