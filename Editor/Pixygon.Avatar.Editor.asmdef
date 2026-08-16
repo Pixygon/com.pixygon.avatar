@@ -4,15 +4,25 @@
     "references": [
         "Pixygon.Avatar",
         "Pixygon.Avatar.Core",
-        "Pixygon.ID"
+        "Pixygon.ID",
+        "glTFast",
+        "glTFast.Export"
     ],
-    "includePlatforms": ["Editor"],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
     "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [],
-    "versionDefines": [],
+    "versionDefines": [
+        {
+            "name": "com.unity.cloud.gltfast",
+            "expression": "",
+            "define": "PIXYGON_GLTF"
+        }
+    ],
     "noEngineReferences": false
 }
